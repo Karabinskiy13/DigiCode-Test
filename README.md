@@ -3,7 +3,7 @@
 
 1. Clone the repository
 ```
-git clone https://github.com/Karabinskiy13/Digicode-test2
+git clone https://github.com/Karabinskiy13/DigiCode-Test
 ```
 2. Install all dependencies
 ```
