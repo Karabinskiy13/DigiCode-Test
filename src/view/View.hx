@@ -1,10 +1,8 @@
 package view;
-import haxe.Timer;
 import openfl.display.Sprite;
 import openfl.display.Stage;
 import openfl.events.MouseEvent;
 import openfl.events.Event;
-import openfl.display.Shape;
 import controller.Controller;
 
 
@@ -16,16 +14,10 @@ class View extends Sprite {
 	private var contY:Int;
 	private var containerWidth:Int;
 	private var containerHeight:Int;
-	private var timer:Timer;
-
 	private var touchMove:Bool = true;
-
 	private var numberOfShapesText:TextShapes;
-
 	private var randName:Int;
-	private var randColor:Int;
-
-    private var numberOfShapesView:Int;
+	private var randColor:Int; 
     private var gravityView:Float;
     private var shapes:Array<String>;
     private var colors:Array<Int>;
@@ -60,13 +52,11 @@ class View extends Sprite {
 
 	public function render(data):Void
 	{
-		numberOfShapesView = data.numberOfShapes; 
 		gravityView = data.gravity;
 		shapes = data.shapes; 
 		colors = data.colors; 
 
-		dataView = {
-			numberOfShapes: data.numberOfShapes,
+		dataView = {		
 			gravity: data.gravity,
 			shapes : data.shapes,
             colors : data.colors
@@ -97,15 +87,14 @@ class View extends Sprite {
 
 
 	}
-	private function plusShape(shapeNumber:Int):Int{
+	private function plusShape():Int{
 		numberOfShapesText.htmlText = "<div>Number of shapes: </div>";
 		numberOfShapesText.appendText(Std.string(rect.numChildren));
-		dataView = updateDataView(rect.numChildren, shapeNumber);
+		dataView = updateDataView(rect.numChildren);
 		return dataView;
 	}
 	
 	private function minusShape(figure:FallingShapes):Int{
-		var shapeNumber = 0;
 
 		figure.removeEventListener(MouseEvent.MOUSE_DOWN, removeShape);
 		rect.removeChild(figure);
@@ -113,14 +102,13 @@ class View extends Sprite {
 		numberOfShapesText.htmlText = "<div>Number of shapes: </div>";
 		numberOfShapesText.appendText(Std.string(rect.numChildren));
 
-		dataView = updateDataView(rect.numChildren, shapeNumber);
+		dataView = updateDataView(rect.numChildren);
 		return dataView;
 	}
 
-	public function updateDataView(numbS:Int, area:Int, ?gravityView:Float):Dynamic
+	public function updateDataView(numbS:Int, ?gravityView:Float):Dynamic
 	{
 		dataView.numberOfShapes = numbS;
-		dataView.summaryArea = area;
 		dataView.gravity = gravityView;
 		return dataView;
 	}
@@ -158,7 +146,6 @@ class View extends Sprite {
 			var clickedX:Int = Math.round(event.localX);
 			var clickedY:Int = Math.round(event.localY);
 			createShape(clickedX, clickedY, "default");
-			// touchMove = false;
 		}
 	}
 
